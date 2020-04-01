@@ -10,12 +10,12 @@ Test data: Testing data: XTest_1k.txt, YTest_1k.txt, XTest_10k.txt, YTest_10k.tx
 The training is done using an MLP for every target SNP forming a neural network of 500 smaller MLPs. Further, specific 10 tag SNPs are selected using mutual information to effectively predict the target SNPs.  
 Weights and biases: Weights_1k_10.txt, Weights_10k_10.txt, bias_1k_10.txt, bias_10k_10.txt  
 Positions: The positions of the selected tag SNPs (using mutual information) Positions_1k_10.txt, Positions_10k_10.txt  
-To perform imputation in plaintext: 
+To perform imputation in plaintext:  
 python HEImputation.py <model_type>  
 model_type can be 10k or 1k  
 
 2. TrainingOnAllData:  
-It consists of all the scripts, data and parsers to pre-process data for entire GWAS dataset. The trained parameters can be used to predict target SNPs from other datasets as GTEX. 
+It consists of all the scripts, data and parsers to pre-process data for entire GWAS dataset. The trained parameters can be used to predict target SNPs from other datasets as GTEX.  
 *Data*  
 DatasetX, DatasetY    
 To parse data in the form of individuals being represented along the rows, run:  
