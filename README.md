@@ -16,10 +16,10 @@ model_type can be 10k or 1k
 
 2. TrainingOnAllData:  
 It consists of all the scripts, data and parsers to pre-process data for entire GWAS dataset. The trained parameters can be used to predict target SNPs from other datasets as GTEX. 
-*Data*
-DatasetX, DatasetY  
+*Data*  
+DatasetX, DatasetY    
 To parse data in the form of individuals being represented along the rows, run:  
-python Parser.py
+python Parser.py  
 Trained parameters follow the same convention as TrainTestSplit.  
 Training Scipts for training weights and the top tag SNPs for targets:  
 python Findingk_1k.py or Findingk_10k.py
