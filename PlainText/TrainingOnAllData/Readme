@@ -1,0 +1,3 @@
+Use parser.py to convert the data style with individuals along the row
+Use HEImputation.py to calculate the prediction probabilities and also generate the target SNP file in a suitable format to run evaluation.py
+Use evaluation.py to get the MicroAUC curves
