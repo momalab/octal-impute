@@ -1,5 +1,5 @@
 # Octal-Impute
-The repository consists of all the scripts, data and source code for fast genotype imputation performed on GWAS and GTEX data. GWAS data has 500 target SNPs to be predicted for 2504 individuals. We perform private genotype imputation on tag SNPs with genomic distance of 10k and 1k. We use machine learning for performing imputation, develop ML models for the same and perform private inference using Paillier. The weights, biases, scripts performing computation on these two different datasets are appended with '1k' or '10k' respectively.  
+The repository consists of all the scripts, data and source code for fast genotype imputation performed on GWAS and GTEX data. GWAS data has 500 target SNPs to be predicted for 2504 individuals. We perform private genotype imputation on tag SNPs with genomic distance of 1k and 10k. We use machine learning for performing imputation, develop ML models for the same and perform private inference using Paillier. The weights, biases, scripts performing computation on these two different datasets are appended with '1k' or '10k' respectively.  
 **Plain-text training and imputation**  
 There are two folders:  
 1. TrainTestSplit consists of GWAS data split into training and test data (80-20 split).  
