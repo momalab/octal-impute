@@ -22,12 +22,11 @@ class Ciphertext
         Ciphertext(const Number & a, Number & mod, Ciphertext & zero) { c=a; n2 = &mod; this->zero = &zero; }
         Ciphertext(const string & a, Number & mod, Ciphertext & zero) { c=Number(a,DEFAULT_BASE); n2 = &mod; this->zero = &zero; }
 
-        // inline explicit operator string() const { return string(c); }
         inline explicit operator string() const { return c.str(DEFAULT_BASE); }
         inline Ciphertext & operator+=(const Ciphertext & a);
         inline Ciphertext & operator-=(const Ciphertext & a);
         inline Ciphertext & operator*=(const Number & a);
-        inline Ciphertext & invert() { c.invert(*n2); }
+        inline Ciphertext & invert() { c.invert(*n2); return *this; }
 
         inline Ciphertext operator+(const Ciphertext & a) const;
         inline Ciphertext operator-(const Ciphertext & a) const;
@@ -42,6 +41,7 @@ inline Ciphertext & Ciphertext::operator+=(const Ciphertext & a)
 {
     c *= a.c;
     c %= (*n2);
+    return *this;
 }
 
 inline Ciphertext & Ciphertext::operator-=(const Ciphertext & a)
@@ -49,6 +49,7 @@ inline Ciphertext & Ciphertext::operator-=(const Ciphertext & a)
     Ciphertext tmp(a);
     tmp.invert();
     *this += tmp;
+    return *this;
 }
 
 inline Ciphertext & Ciphertext::operator*=(const Number & a)
@@ -67,6 +68,7 @@ inline Ciphertext & Ciphertext::operator*=(const Number & a)
         if ( a[msb] ) r += *this;
     }
     *this = r;
+    return *this;
 }
 
 inline Ciphertext Ciphertext::operator+(const Ciphertext & a) const

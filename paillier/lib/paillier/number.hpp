@@ -29,35 +29,35 @@ class Number
         inline explicit operator int() const { return unsigned(*this); }
         inline explicit operator unsigned() const { return mpz_get_ui(n); }
         inline explicit operator string() const { return str(); }
-        inline Number & operator=(const Number & a) { mpz_set(n, a.n); }
-        inline Number & operator=(const mpz_t & a) { mpz_set(n, a); }
-        inline Number & operator=(const string & a) { mpz_set_str(n, a.c_str(), DEFAULT_BASE); }
-        inline Number & operator=(uint64_t a) { mpz_set_ui(n, a); }
-        inline Number & operator+=(const Number & a) { mpz_add(n, n, a.n); }
-        inline Number & operator+=(uint64_t a) { mpz_add_ui(n, n, a); }
-        inline Number & operator-=(const Number & a) { mpz_sub(n, n, a.n); }
-        inline Number & operator-=(uint64_t a) { mpz_sub_ui(n, n, a); }
-        inline Number & operator*=(const Number & a) { mpz_mul(n, n, a.n); }
-        inline Number & operator*=(uint64_t a) { mpz_mul_ui(n, n, a); }
-        inline Number & operator/=(const Number & a) { mpz_tdiv_q(n, n, a.n); }
-        inline Number & operator/=(uint64_t a) { mpz_tdiv_q_ui(n, n, a); }
-        inline Number & operator%=(const Number & a) { mpz_mod(n, n, a.n); }
-        inline Number & operator%=(uint64_t a) { mpz_mod_ui(n, n, a); }
-        inline Number & operator<<=(const Number & a) { *this <<= unsigned(a); }
-        inline Number & operator<<=(uint64_t a) { mpz_mul_2exp(n, n, a); }
-        inline Number & operator>>=(const Number & a) { *this >>= unsigned(a); }
-        inline Number & operator>>=(uint64_t a) { mpz_tdiv_q_2exp(n, n, a); }
-        inline Number & operator&=(const Number & a) { mpz_and(n, n, a.n); }
-        inline Number & operator|=(const Number & a) { mpz_ior(n, n, a.n); }
-        inline Number & operator^=(const Number & a) { mpz_xor(n, n, a.n); }
-        inline Number & gcd(const Number & a) { mpz_gcd(n, n, a.n); }
-        inline Number & invert(const Number & a) { mpz_invert(n, n, a.n); }
-        inline Number & lcm(const Number & a) { mpz_lcm(n, n, a.n); }
-        inline Number & pow(const Number & e, const Number & m) { mpz_powm(n, n, e.n, m.n); }
-        inline Number & pow(uint64_t e, const Number & m) { mpz_powm_ui(n, n, e, m.n); }
-        inline Number & prime() { randombits(); mpz_nextprime(n, n); }
-        inline Number & random() { mpz_urandomm(n, state, n); }
-        inline Number & randombits() { mpz_urandomb(n, state, unsigned(*this)); }
+        inline Number & operator=(const Number & a) { mpz_set(n, a.n); return *this; }
+        inline Number & operator=(const mpz_t & a) { mpz_set(n, a); return *this; }
+        inline Number & operator=(const string & a) { mpz_set_str(n, a.c_str(), DEFAULT_BASE); return *this; }
+        inline Number & operator=(uint64_t a) { mpz_set_ui(n, a); return *this; }
+        inline Number & operator+=(const Number & a) { mpz_add(n, n, a.n); return *this; }
+        inline Number & operator+=(uint64_t a) { mpz_add_ui(n, n, a); return *this; }
+        inline Number & operator-=(const Number & a) { mpz_sub(n, n, a.n); return *this; }
+        inline Number & operator-=(uint64_t a) { mpz_sub_ui(n, n, a); return *this; }
+        inline Number & operator*=(const Number & a) { mpz_mul(n, n, a.n); return *this; }
+        inline Number & operator*=(uint64_t a) { mpz_mul_ui(n, n, a); return *this; }
+        inline Number & operator/=(const Number & a) { mpz_tdiv_q(n, n, a.n); return *this; }
+        inline Number & operator/=(uint64_t a) { mpz_tdiv_q_ui(n, n, a); return *this; }
+        inline Number & operator%=(const Number & a) { mpz_mod(n, n, a.n); return *this; }
+        inline Number & operator%=(uint64_t a) { mpz_mod_ui(n, n, a); return *this; }
+        inline Number & operator<<=(const Number & a) { *this <<= unsigned(a); return *this; }
+        inline Number & operator<<=(uint64_t a) { mpz_mul_2exp(n, n, a); return *this; }
+        inline Number & operator>>=(const Number & a) { *this >>= unsigned(a); return *this; }
+        inline Number & operator>>=(uint64_t a) { mpz_tdiv_q_2exp(n, n, a); return *this; }
+        inline Number & operator&=(const Number & a) { mpz_and(n, n, a.n); return *this; }
+        inline Number & operator|=(const Number & a) { mpz_ior(n, n, a.n); return *this; }
+        inline Number & operator^=(const Number & a) { mpz_xor(n, n, a.n); return *this; }
+        inline Number & gcd(const Number & a) { mpz_gcd(n, n, a.n); return *this; }
+        inline Number & invert(const Number & a) { mpz_invert(n, n, a.n); return *this; }
+        inline Number & lcm(const Number & a) { mpz_lcm(n, n, a.n); return *this; }
+        inline Number & pow(const Number & e, const Number & m) { mpz_powm(n, n, e.n, m.n); return *this; }
+        inline Number & pow(uint64_t e, const Number & m) { mpz_powm_ui(n, n, e, m.n); return *this; }
+        inline Number & prime() { randombits(); mpz_nextprime(n, n); return *this; }
+        inline Number & random() { mpz_urandomm(n, state, n); return *this; }
+        inline Number & randombits() { mpz_urandomb(n, state, unsigned(*this)); return *this; }
 
         template <class T> inline Number operator+(const T & a) const;
         template <class T> inline Number operator-(const T & a) const;

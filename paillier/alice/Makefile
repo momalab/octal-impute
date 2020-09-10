@@ -45,7 +45,6 @@ SECRET_KEY=secret${KEYEXT}
 
 all: compile run
 
-run: request-positions parse generate-keys encrypt send
 
 %: %.cpp
 	${CC} ${FLAGS} ${INCS} $< -o $@${EXT} ${LIBS}
@@ -74,5 +73,7 @@ parse:
 request-positions:
 	cp ${BOB}/${POSITIONS} .
 
+run: request-positions parse generate-keys encrypt send
+	
 send:
 	cp ${ENCRYPTED_QUERY} ${PUBLIC_KEY} ${BOB}/

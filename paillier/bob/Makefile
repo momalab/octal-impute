@@ -31,8 +31,6 @@ ALICE=../alice
 
 all: compile run
 
-run: query send-result
-
 %: %.cpp
 	${CC} ${FLAGS} ${INCS} $< -o $@${EXT} ${LIBS}
 
@@ -48,6 +46,8 @@ compile:
 
 query:
 	./${QUERIER}${EXT} ${ENCRYPTED_QUERY} ${WEIGHTS} ${ENCRYPTED_TARGET} ${N_THREADS} ${KEYSIZE}
+
+run: query send-result
 
 send-result:
 	cp ${ENCRYPTED_TARGET} ${ALICE}

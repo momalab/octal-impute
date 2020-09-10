@@ -28,10 +28,9 @@ class PublicKey
         PublicKey(istream & in);
         PublicKey(const Number & g, const Number & n) { init(g, n); }
         PublicKey(const PublicKey & pk) : PublicKey(pk.g, pk.n) { }
-        // PublicKey(const PublicKey & pk) { init(pk.g, pk.n); }
 
         inline operator string() const { return string(g)+" "+string(n); }
-        inline PublicKey & operator=(const PublicKey & pk) { init(pk.g, pk.n); }
+        inline PublicKey & operator=(const PublicKey & pk) { init(pk.g, pk.n); return *this; }
         Ciphertext encrypt(const Number & m);
         Number getG() const { return g; }
         Number getN() const { return n; }
