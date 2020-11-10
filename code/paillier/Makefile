@@ -23,7 +23,7 @@ PYTHON=python3
 TIMER=timer.py
 MEMORY=memory.py
 
-LINUX_TIME=../tool/time
+LINUX_TIME=time
 
 all: compile run
 

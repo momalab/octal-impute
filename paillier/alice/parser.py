@@ -11,8 +11,11 @@ def oneHotEncoder(matrix):
 
 def parse(filein, filepos, fileout):
     xtest = np.loadtxt(filein, delimiter=',')
+    # print('xtest',xtest.shape)
     positions = np.loadtxt(filepos, delimiter=',')
+    # print('positions',positions.shape)
     nTargets = positions.shape[0]
+    # print('nt',nTargets)
     with open(fileout, 'w') as fout:
         for t in range(nTargets):
             tagPositions = positions[t].astype('int')
