@@ -1,6 +1,6 @@
-ID=1# database ID
+ID=10# database ID
 N_THREADS=8
-KEYSIZE=1024
+KEYSIZE=3072#1024
 
 # COMPILER
 CC=g++

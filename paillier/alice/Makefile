@@ -1,5 +1,5 @@
-ID=1# database ID
-KEYSIZE=1024#3072
+ID=10# database ID
+KEYSIZE=3072#1024
 N_THREADS=8
 N_INDIVIDUALS=501
 N_INPUTS=30
@@ -74,6 +74,6 @@ request-positions:
 	cp ${BOB}/${POSITIONS} .
 
 run: request-positions parse generate-keys encrypt send
-	
+
 send:
 	cp ${ENCRYPTED_QUERY} ${PUBLIC_KEY} ${BOB}/
