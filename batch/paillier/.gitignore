@@ -1,0 +1,5 @@
+alice/positions*.data
+decryptedProb*.data
+*.exe
+*.key
+*.tmp
