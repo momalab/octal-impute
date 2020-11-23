@@ -93,6 +93,9 @@ int main( int argc, char * argv[] )
     size_t nOutputs = stoul(argv[7]);
     cout << (double(t1.get())/us) << "\n";
 
+    cout << nTargets << "x" << nIndividuals << "x" << nInputs << '\n';
+    cout << encProbs.size() << "x" << encProbs[0].size() << "x" << encProbs[0][0].size() << '\n';
+
     // cout << "Decryption time (s): " << flush;
     // Timer t2;
     // decPacked.resize(nTargets);

@@ -44,6 +44,6 @@ install:
 	pip3 install --upgrade numpy==1.18.5 pandas==1.1.2 tensorflow==2.3.0
 
 run:
-	cd ${ALICE} && { ${LINUX_TIME} -v make run QUERY=$(abspath ${QUERY}) ID=${ID} N_INDIVIDUALS=${N_INDIVIDUALS} ; } 2> $(abspath .)/${MEMORY_ENCRYPTION}
+	cd ${ALICE} && { ${LINUX_TIME} -v make run QUERY=$(abspath ${QUERY}) ID=${ID} ; } 2> $(abspath .)/${MEMORY_ENCRYPTION}
 	cd ${BOB} && { ${LINUX_TIME} -v make run ID=${ID} N_THREADS=${N_THREADS} ; } 2> $(abspath .)/${MEMORY_QUERY}
 	cd ${ALICE} && { ${LINUX_TIME} -v make decrypt QUERY_DECRYPTED_PROBS=$(abspath .)/${OUTPUT_PROBS} QUERY_DECRYPTED_TARGETS=$(abspath .)/${OUTPUT_TARGETS} ID=${ID} N_INDIVIDUALS=${N_INDIVIDUALS} ; } 2> $(abspath .)/${MEMORY_DECRYPTION}

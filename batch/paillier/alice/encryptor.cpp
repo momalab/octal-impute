@@ -59,7 +59,7 @@ int main(int argc, char * argv[])
     auto nInputs = plaintexts[0][0].size();
     cout << (double(timer.get())/us) << "\n";
 
-    // cout << nTargets << "x" << nIndividuals << "x" << nInputs << '\n';
+    cout << nTargets << "x" << nIndividuals << "x" << nInputs << '\n';
 
     cout << "Packing time (s): " << flush;
     timer = Timer();

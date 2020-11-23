@@ -94,10 +94,10 @@ int main(int argc, char * argv[])
     nInputs = tagSNPs[0][0].size();
     nOutputs = weights[0].size();
     cout << (double(t1.get())/us) << "\n";
-    // cout << "nTargets    : " << nTargets     << '\n';
-    // cout << "nIndividuals: " << nIndividuals << '\n';
-    // cout << "nInputs     : " << nInputs      << '\n';
-    // cout << "nOutputs    : " << nOutputs     << '\n';
+    cout << "nTargets    : " << nTargets     << '\n';
+    cout << "nIndividuals: " << nIndividuals << '\n';
+    cout << "nInputs     : " << nInputs      << '\n';
+    cout << "nOutputs    : " << nOutputs     << '\n';
 
     cout << "Multiplication time (s): " << flush;
     auto timer = Timer();
