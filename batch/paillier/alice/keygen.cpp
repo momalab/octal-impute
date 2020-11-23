@@ -31,7 +31,6 @@ int main(int argc, char * argv[])
     pk.fillExpTable();
     Number number = 5;
     auto dnumber = sk.decrypt( pk.encrypt( number ) );
-    cout << "CMP " << (number == dnumber) << " " << number << " " << dnumber << "\n";
 
     cout << "Writing time (s): " << flush;
     Timer t2;
