@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include "ciphertext.hpp"
-#include "publickey.hpp"
+#include "publickey3.hpp"
 #include "number.hpp"
 
 using std::istream;
@@ -12,7 +12,7 @@ using std::string;
 class SecretKey
 {
     private:
-        Number l, u;
+        Number alpha, u;
         PublicKey pubkey;
 
         static Number L(const Number & x, const Number & n) { return (x-1) / n; };
@@ -22,25 +22,24 @@ class SecretKey
         SecretKey(istream & in);
         SecretKey(const Number & bitsize);
         SecretKey(const Number & p, const Number & q);
-        SecretKey(const Number & l, const Number & u, const PublicKey & pk);
-        SecretKey(const SecretKey & sk) : SecretKey(sk.l, sk.u, sk.pubkey) { }
+        SecretKey(const Number & alpha, const Number & u, const PublicKey & pk);
+        SecretKey(const SecretKey & sk) : SecretKey(sk.alpha, sk.u, sk.pubkey) { }
 
-        inline operator string() const { return string(l)+" "+string(u)+" "+string(pubkey); }
+        inline operator string() const { return string(alpha)+" "+string(u)+" "+string(pubkey); }
         Number decrypt(const Ciphertext & a) const;
         bool generateKeys(const Number & bitsize);
         bool generateKeys(const Number & p, const Number & q);
-        Number getL() const { return l; }
+        Number getAlpha() const { return alpha; }
         PublicKey getPublicKey() const { return pubkey; }
         Number getU() const { return u; }
 
         friend inline ostream & operator<<(ostream & os, const SecretKey & sk) { return os << string(sk); }
 };
 
-
 SecretKey::SecretKey(istream & in)
 {
     string s;
-    in >> s; l = Number(s);
+    in >> s; alpha = Number(s);
     in >> s; u = Number(s);
     in >> s; Number g(s);
     in >> s; Number n(s);
@@ -59,7 +58,7 @@ SecretKey::SecretKey(const Number & p, const Number & q)
 
 Number SecretKey::decrypt(const Ciphertext & a) const
 {
-    auto m = Number::pow(a.c, l, pubkey.n2);
+    auto m = Number::pow(a.c, alpha, pubkey.n2);
     m = L(m, pubkey.n);
     m *= u;
     m %= pubkey.n;
@@ -85,14 +84,15 @@ bool SecretKey::generateKeys(const Number & p, const Number & q)
     auto qm1 = q-1;
     auto gcd = Number::gcd( n, pm1*qm1 );
     if ( gcd != 1 ) return false;
-    l = Number::lcm(pm1, qm1);
+    auto l = Number::lcm(pm1, qm1);
+    alpha = l; /// 2;
     auto n2 = n*n;
     Number g = 1;
     do
     {
         // g = Number::random(n2);
         g += 1;
-        u = Number::pow(g, l, n2);
+        u = Number::pow(g, alpha, n2);
         u = L(u, n);
     } while ( Number::gcd(u, n) != 1 );
     u.invert(n);
