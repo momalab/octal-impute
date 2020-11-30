@@ -1,3 +1,0 @@
-To run the imputation code, 
-python HEImputation.py <model_type>
-model_type can be 10k or 1k
