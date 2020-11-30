@@ -1,0 +1,45 @@
+cd alice && { time make run QUERY=/home/data1/octal-impute/batch/paillier/XTest_1k.txt ID=1 ; } 2> /home/data1/octal-impute/batch/paillier/time_memory_encryption.tmp
+make[1]: Entering directory '/home/data1/octal-impute/batch/paillier/alice'
+cp ../bob/positions1.data .
+python3 parser.py /home/data1/octal-impute/batch/paillier/XTest_1k.txt positions1.data queryTagSNPsParsed1.tmp
+./keygen.exe 3072
+GENERATING KEYS (key size: 3072 bits)
+Generation time (s): 0.396801
+Writing time (s): 0.000101
+KEYS GENERATED!
+./encryptor.exe queryTagSNPsParsed1.tmp encryptedQuery1.tmp 192
+ENCRYPTION STARTED!
+Loading time (s): 10.5765
+500x501x30
+Packing time (s): 0.344
+Encryption time (s): 0.881258
+Writing time (s): 0.563821
+ENCRYPTION FINISHED!
+mv encryptedQuery1.tmp public.key ../bob/
+make[1]: Leaving directory '/home/data1/octal-impute/batch/paillier/alice'
+cd bob && { time make run ID=1 N_THREADS=192 ; } 2> /home/data1/octal-impute/batch/paillier/time_memory_query.tmp
+make[1]: Entering directory '/home/data1/octal-impute/batch/paillier/bob'
+./querier.exe encryptedQuery1.tmp weights1.data encryptedProbs1.tmp 192 3072
+QUERY STARTED!
+Loading time (s): 0.432124
+nTargets    : 500
+nIndividuals: 3
+nInputs     : 30
+nOutputs    : 3
+Multiplication time (s): 0.117234
+Writing time (s): 0.067196
+QUERY FINISHED!
+mv encryptedProbs1.tmp ../alice
+make[1]: Leaving directory '/home/data1/octal-impute/batch/paillier/bob'
+cd alice && { time make decrypt QUERY_DECRYPTED_PROBS=/home/data1/octal-impute/batch/paillier/ypred1.data QUERY_DECRYPTED_TARGETS=/home/data1/octal-impute/batch/paillier/target1.data ID=1 N_INDIVIDUALS=501 ; } 2> /home/data1/octal-impute/batch/paillier/time_memory_decryption.tmp
+make[1]: Entering directory '/home/data1/octal-impute/batch/paillier/alice'
+./decryptor.exe encryptedProbs1.tmp decryptedProb1.data 192 3072 501 30 3
+DECRYPTION STARTED!
+Loading time (s): 0.152992
+500x501x30
+500x3x3
+Decryption time (s): 2.68757
+Unpacking time (s): 0.212252
+Writing time (s): 0.221396
+DECRYPTION FINISHED!
+make[1]: Leaving directory '/home/data1/octal-impute/batch/paillier/alice'
