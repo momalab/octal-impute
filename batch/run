@@ -28,3 +28,16 @@ cd ..
 python3 format.py decryptedProb${ID}.tmp ${ID}k_proba_formatted.tmp
 # python3 evaluation.py -i ${ID}k_proba_formatted.tmp -t YTrue_${ID}k_formatted.txt -o /results/auc_test_${ID}k.png
 python3 evaluation.py -i ${ID}k_proba_formatted.tmp -t YTrue_${ID}k_formatted.txt -o auc_test_${ID}k.png
+
+echo "Running 80k"
+export ID=80
+export N_INDIVIDUALS=1000
+cd paillier && make run ID=${ID} N_INDIVIDUALS=${N_INDIVIDUALS}
+cp alice/decryptedProb${ID}.data ../decryptedProb${ID}.tmp
+# cp time_memory_encryption.tmp /results/time_memory_encryption${ID}.txt
+# cp time_memory_query.tmp /results/time_memory_query${ID}.txt
+# cp time_memory_decryption.tmp /results/time_memory_decryption${ID}.txt
+cd ..
+python3 format.py decryptedProb${ID}.tmp ${ID}k_proba_formatted.tmp
+# python3 evaluation.py -i ${ID}k_proba_formatted.tmp -t YTrue_${ID}k_formatted.txt -o /results/auc_test_${ID}k.png
+python3 evaluation.py -i ${ID}k_proba_formatted.tmp -t YTrue_${ID}k_formatted.txt -o auc_test_${ID}k.png
