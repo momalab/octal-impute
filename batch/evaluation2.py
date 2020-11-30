@@ -6,8 +6,7 @@ from sklearn.metrics import *
 import numpy as np
 import matplotlib.pyplot as plt
 import sys, getopt
-# 1k: python evaluation.py -i 1k_proba_formatted.txt -t YTrue_1k_formatted.txt -o auc_test_1k.png
-# 10k: python evaluation.py -i 10k_proba_formatted.txt -t YTrue_10k_formatted.txt -o auc_test_10k.png
+
 def f(x):
     return np.exp(x)/(1+np.exp(x))
 
@@ -36,15 +35,14 @@ def plotROC(n_classes, roc_auc, fpr, tpr,title, outputfile):
         plt.plot(fpr[i], tpr[i], label='ROC curve of class {0} (area = {1:0.6f})'
                                        ''.format(i, roc_auc[i]))
 
-    #plt.plot([0, 1], [0, 1], 'k--')
+    plt.plot([0, 1], [0, 1], 'k--')
     plt.xlim([0.0, 1.0])
-    plt.ylim([0.4, 1.02])
+    plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    #plt.title(title)
-    plt.legend(loc="lower right")
+    plt.title(title)
     plt.grid(True)
-
+    plt.legend(loc="lower right")
     plt.savefig(outputfile)
 
 
@@ -66,28 +64,29 @@ def main(argv):
             targetfile = arg
         elif opt in ("-o", "--ofile"):
             outputfile = arg
-
+    
     print('Input file is: ', inputfile)
     print('Target file is: ', targetfile)
     print('Output file is: ', outputfile)
-
-
-
-    ref = pd.read_csv(inputfile)
+    
+    
+   
+    ref = pd.read_csv(inputfile, delimiter=' ')
     target = pd.read_csv(targetfile)
-
+     
     # for reference data
     print(20*"-"+"MicroAUC for reference data"+20*"-")
 
     y_label_ref = pd.get_dummies(target['class'].values).reindex(columns=[0,1,2], fill_value=0).values
-    y_pred_ref = ref.values
+    y_pred_ref = ref.iloc[0:,0:].values
 
-
+    
     fpr_ref, tpr_ref, roc_auc_ref, n_classes_ref = getStats(y_label_ref, y_pred_ref)
-    print('MicroAUC for %ds classes ' % n_classes_ref)
+    print('MicroAUC for %d classes ' % n_classes_ref)
     print(roc_auc_ref)
-
-    plotROC(n_classes_ref, roc_auc_ref, fpr_ref, tpr_ref,'ROC curves for Test Data', outputfile)
+    
+    plotROC(n_classes_ref, roc_auc_ref, fpr_ref, tpr_ref,'', outputfile)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+    
