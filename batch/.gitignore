@@ -1,3 +1,5 @@
 *.tmp
 *.png
+YTrue_20k_formatted.txt
+YTrue_40k_formatted.txt
 YTrue_80k_formatted.txt
