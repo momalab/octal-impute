@@ -29,7 +29,7 @@ The weights and biases will get stored in files called weights_<starting_target_
 # Private Inference using the Paillier Cryptosystem
 
 ## Setup
-1. Install dependencies (sudo required):
+1. Install dependencies (sudo required). If tensorflow 2.3.0 is not found, it is possible to use version 2.0.0a0:
 ```
 cd ../paillier
 ./install.sh
