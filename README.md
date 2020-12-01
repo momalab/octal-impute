@@ -26,4 +26,48 @@ python Training.py <target_no>
 ```
 The weights and biases will get stored in files called weights_<starting_target_no>\_<end_target_no>.txt. Our extracted parameters are also available in Weights/ and Bias/
 
+# Private Inference using the Paillier Cryptosystem
 
+## Setup
+1. Install dependencies (sudo required):
+```
+cd ../paillier
+./install.sh
+```
+2. Unzip data:
+```
+./unzip.sh
+```
+
+## Run
+
+### TL;DR
+1. Compile and run everything for all databases:
+```
+sh run [N_THREADS]
+```
+N_THREADS is a optional command that specifies the number of threads to be used. The default is 8.
+
+### Step-by-Step
+1. Compile
+```
+./compile.sh
+```
+
+2. Run for a specific database:
+```
+./run.sh ID N_THREADS
+```
+For example:
+```
+./run.sh 10 16
+```
+Will run for the 10k database with 16 threads.
+
+The script will automatically call all steps: parse, encryption, query, decryption, and calculate AUC.
+
+Files of interest:
+* inputs: XTest_*k.txt in paillier/paillier/
+* weights: weights*.data in paillier/paillier/bob/
+* outputs: *k_proba_formatted.tmp in paillier/
+* auc: auc_test_*k.png
