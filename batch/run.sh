@@ -14,9 +14,14 @@ isValid(){
 isValid $1
 if [[ ${cmp} -eq 1 ]]; then
     echo "Running ${1}k"
+    if [[ $1 -eq 1 || $1 -eq 10 ]]; then
+        nIndividuals=501
+    else
+        nIndividuals=1000
+    fi
     export ID=${1}
-    export N_INDIVIDUALS=${2}
-    export N_THREADS=${3}
+    export N_INDIVIDUALS=${nIndividuals}
+    export N_THREADS=${2}
     cd paillier && make run ID=${ID} N_INDIVIDUALS=${N_INDIVIDUALS} N_THREADS=${N_THREADS}
     cp alice/decryptedProb${ID}.data ../decryptedProb${ID}.tmp
     # cp time_memory_encryption.tmp /results/time_memory_encryption${ID}.txt

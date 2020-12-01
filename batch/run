@@ -34,7 +34,7 @@ fi
 # python3 format.py decryptedProb${ID}.tmp ${ID}k_proba_formatted.tmp
 # # python3 evaluation.py -i ${ID}k_proba_formatted.tmp -t YTrue_${ID}k_formatted.txt -o /results/auc_test_${ID}k.png
 # python3 evaluation.py -i ${ID}k_proba_formatted.tmp -t YTrue_${ID}k_formatted.txt -o auc_test_${ID}k.png
-./run.sh 10 501 ${nThreads}
+./run.sh 10 ${nThreads}
 
 # echo "Running 20k"
 # export ID=20
