@@ -2,6 +2,7 @@
 The repository consists of all the scripts, data and source code for fast genotype imputation performed on GWAS data. GWAS data has 500 target SNPs to be predicted for 2.5k individuals. We use machine learning for performing imputation, develop ML models for the same and perform private inference using Paillier. This is the repo for weights, biases, scripts for both plain-text and encrypted imputation.  
 ## Plain-text
 ### Dependencies
+* python 3.6.5
 * keras 2.3.1
 * scikit-learn 0.23.2
 * numpy 1.19.2
