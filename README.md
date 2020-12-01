@@ -1,25 +1,28 @@
 # Octal-Impute
-The repository consists of all the scripts, data and source code for fast genotype imputation performed on GWAS and GTEX data. GWAS data has 500 target SNPs to be predicted for 2504 individuals. We perform private genotype imputation on tag SNPs with genomic distance of 1k and 10k. We use machine learning for performing imputation, develop ML models for the same and perform private inference using Paillier. The weights, biases, scripts performing computation on these two different datasets are appended with '1k' or '10k' respectively.  
-**Plain-text training and imputation**  
-There are two trained models:  
-1. TrainTestSplit consists of GWAS data split into training and test data (80-20 split).  
-*Data*  
-Training data: XTrain_1k.txt, YTrain_1k.txt, XTrain_10k.txt, YTrain_10k.txt   
-Test data: Testing data: XTest_1k.txt, YTest_1k.txt, XTest_10k.txt, YTest_10k.txt  
-*Trained parameters*  
-The training is done using an MLP for every target SNP forming a neural network of 500 smaller MLPs. Further, specific 10 tag SNPs are selected using mutual information to effectively predict the target SNPs.  
-Weights and biases: Weights_1k_10.txt, Weights_10k_10.txt, bias_1k_10.txt, bias_10k_10.txt  
-Positions: The positions of the selected tag SNPs (using mutual information) Positions_1k_10.txt, Positions_10k_10.txt  
-To perform imputation in plaintext:  
-python HEImputation.py <model_type>  
-model_type can be 10k or 1k  
+The repository consists of all the scripts, data and source code for fast genotype imputation performed on GWAS data. GWAS data has 500 target SNPs to be predicted for 2.5k individuals. We use machine learning for performing imputation, develop ML models for the same and perform private inference using Paillier. This is the repo for weights, biases, scripts for both plain-text and encrypted imputation.  
+## Plain-text
+### Dependencies
+* keras 2.3.1
+* scikit-learn 0.23.2
+* numpy 1.19.2
 
-2. TrainingOnAllData:  
-It consists of all the scripts, data and parsers to pre-process data for entire GWAS dataset. The trained parameters can be used to predict target SNPs from other datasets as GTEX.  
-*Data*  
-DatasetX, DatasetY    
-To parse data in the form of individuals being represented along the rows, run:  
-python Parser.py  
-Trained parameters follow the same convention as TrainTestSplit.  
-Training Scipts for training weights and the top tag SNPs for targets:  
-python Findingk_1k.py or Findingk_10k.py
+1. Clone octal-impute:
+```
+git clone https://github.com/momalab/octal-impute.git
+```
+2. Change directory to Plain-text:
+```
+cd PlainText
+```
+3. Find top features:
+```
+python find_top_tags.py X_train.txt y_train.txt Positions <starting_target_no> <end_target_no>
+```
+The positions will get stored in files called Positions_<starting_target_no>\_<end_target_no>.txt. Our extracted feature positions are also available in Positions/
+4. Run Training script:
+```
+python Training.py <target_no>
+```
+The weights and biases will get stored in files called weights_<starting_target_no>\_<end_target_no>.txt. Our extracted parameters are also available in Weights/ and Bias/
+
+
