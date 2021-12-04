@@ -71,3 +71,18 @@ Files of interest:
 * weights: weights*.data in paillier/paillier/bob/
 * outputs: *k_proba_formatted.tmp in paillier/
 * auc: auc_test_*k.png
+
+### Cite us:
+E. Sarkar, E. Chielle, G. Gürsoy, O. Mazonka, M. Gerstein and M. Maniatakos, "Fast and Scalable Private Genotype Imputation Using Machine Learning and Partially Homomorphic Encryption," in IEEE Access, vol. 9, pp. 93097-93110, 2021, doi: 10.1109/ACCESS.2021.3093005.
+```
+@ARTICLE{9466098,
+  author={Sarkar, Esha and Chielle, Eduardo and Gürsoy, Gamze and Mazonka, Oleg and Gerstein, Mark and Maniatakos, Michail},
+  journal={IEEE Access},
+  title={Fast and Scalable Private Genotype Imputation Using Machine Learning and Partially Homomorphic Encryption},
+  year={2021},
+  volume={9},
+  number={},
+  pages={93097-93110},
+  doi={10.1109/ACCESS.2021.3093005}
+}
+```
